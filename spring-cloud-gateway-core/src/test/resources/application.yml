@@ -183,6 +183,15 @@ spring:
         filters:
         - SetStatus=404
 
+        # =====================================
+      - id: path_multi
+        uri: ${test.uri}
+        predicates:
+          - Host=**.pathmulti.org
+          - Path=/anything/multi1{num},/anything/multi2{num}
+        filters:
+          - SetPath=/anything/multi{num}
+
       # =====================================
       - id: redirect_to_test
         uri: ${test.uri}
@@ -235,6 +244,14 @@ spring:
         - Path=/foo/{segment}
         filters:
         - SetPath=/{segment}
+
+        # =====================================
+      - id: set_path_host_test
+        uri: ${test.uri}
+        predicates:
+          - Host={subdomain}.setpathhost.org
+        filters:
+          - SetPath=/{subdomain}
 
       # =====================================
       - id: strip_prefix_test
